@@ -56,5 +56,5 @@ jobs:
               "s|#REPONAME#|${{ env.REPO }}|g"
 
           - name: Updating azure
-            run: echo docker-compose.yml
+            run: cat docker-compose.yml
 
