@@ -53,8 +53,8 @@ jobs:
           - name: update template
             run: |
               sed docker-compose.yml -e "s|#ACR_REPO#|${{ secrets.ACR_REPO }}|g" -e \
-              "s|#REPONAME#|${{ env.REPO }}|g"
+              "s|#REPONAME#|${{ env.REPO }}|g" > docker-compose-final.yml
 
           - name: Updating azure
-            run: cat docker-compose.yml
+            run: cat docker-compose-final.yml
 
