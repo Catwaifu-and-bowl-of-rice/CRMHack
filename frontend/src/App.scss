@@ -27,9 +27,11 @@
     $character-side-margin: 4rem;
     .character {
       position: absolute;
-      height: 90vh;
-      bottom: 0;
-      left: -15%;
+      // left: 0;
+      // translate: 0;
+      // height: 90vh;
+      // bottom: 0;
+      // left: -15%;
     }
     .left {
       margin-left: $character-side-margin;

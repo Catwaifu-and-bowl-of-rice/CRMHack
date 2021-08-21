@@ -2,6 +2,7 @@ import React from 'react';
 import examplia from '@characters/examplia/examplia';
 import { testroom } from '@backgrounds/bcgIndex';
 import './App.scss';
+import Character from './components/character/character';
 
 function App() {
   return (
@@ -9,7 +10,9 @@ function App() {
       <div className="novelWrapper">
         <img src={testroom} className="bcg" />
         <section className="characters">
-          <img src={examplia.testtag} className="character left" />
+          {
+            <Character character={examplia} emotion="testtag" />
+          }
         </section>
         <section className="dialog">
           <h4 className="charName">Examplia</h4>
