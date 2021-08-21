@@ -1,6 +1,6 @@
 export type Emotion = string; 
 
-type CharacterInfo = {
+interface CharacterInfo {
   img: string,
   origin?: {
     x: number,

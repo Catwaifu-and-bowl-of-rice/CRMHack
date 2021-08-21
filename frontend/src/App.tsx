@@ -15,6 +15,10 @@ const App = () => {
       text: "Pamagi",
       character_name: "Semen",
     },
+    {
+      text: "Whoooma apoooma a aboba perdola. Superhyper gigachad. Hhuy uu ii asli epasue. Saoeurp.",
+      character_name: "Semen",
+    },
   ]);
 
   const addDialogMessage = (text: string, character_name: string) => {
