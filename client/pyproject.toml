@@ -6,6 +6,7 @@ authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+fast-bitrix24 = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
 
