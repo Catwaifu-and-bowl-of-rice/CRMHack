@@ -1,0 +1,64 @@
+@import "./styles/fonts";
+
+.novelWrapper {
+  position: relative;
+  // overflow-x: hidden;
+
+  // min-height: 600px;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: end;
+
+  // font-size: ;
+
+  overflow: hidden;
+  .bcg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    // right: 0;
+    // bottom: auto;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+  .characters {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    $character-side-margin: 4rem;
+    .character {
+      position: absolute;
+      // left: 0;
+      // translate: 0;
+      height: 90vh;
+      // bottom: 0;
+      // left: -15%;
+      // margin: auto;
+
+      // margin-right: 2rem;
+    }
+    .left {
+      align-self: start;
+      margin-left: $character-side-margin;
+    }
+    .right {
+      align-self: end;
+      margin-right: $character-side-margin;
+    }
+    .center {
+      align-self: center;
+    }
+  }
+}

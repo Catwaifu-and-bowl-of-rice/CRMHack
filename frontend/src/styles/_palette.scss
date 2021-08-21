@@ -1,0 +1,27 @@
+$palette: (
+  dialog: (
+    bcg: rgba(#333, 0.55),
+    msgBcgWaifu: rgba(#444, 1),
+    msgBcg: #444,
+    dialogText: white,
+  ),
+);
+
+@function clr($category, $color, $special: null) {
+  @if map-has-key($palette, $category) {
+    $cat: map-get($palette, $category);
+    @if map-has-key($cat, $color) {
+      $clr: map-get($cat, $color);
+      @if $special {
+        @if map-has-key($clr, $special) {
+          $res: map-get($clr, $special);
+          @return $res;
+        }
+        @error "Special #{$category}-#{$color}-#{$special} is wrong";
+      }
+      @return $clr;
+    }
+    @error "Color #{$category}-#{$color}-#{$special} is wrong";
+  }
+  @error "Category #{$category}-#{$color}-#{$special} is wrong";
+}
