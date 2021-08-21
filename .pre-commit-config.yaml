@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: black
+        name: black
+        entry: bash -c "cd client && poetry run black --check src"
+        pass_filenames: false
+        always_run: true
+        language: system
