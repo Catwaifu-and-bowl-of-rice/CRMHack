@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    // "baseUrl": "src",
+    "paths": {
+      "@characters/*": ["./src/images/characters/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@backgrounds/*": ["./src/images/backgrounds/*"],
+      // "@utils/*": ["./src/utils/*"],
+      // "@icons/*": ["./src/icons/*"],
+      // "@tests/*": ["./src/tests/*"],
+      // "@quests/*": ["./src/systems/quests/*"],
+      "@ctypes/*": ["./src/commonTypes/*"],
+      "@root/*": ["./src/*"]
+    }
+  }
+}
