@@ -25,14 +25,14 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Logging into GitHub Container Registry
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+        run: echo ${{ secrets.ACR_PASSWORD }} | docker login crmreg.azurecr.io -u ${{ secrets.ACR_USERNAME }} --password-stdin
 
       - name: downcase REPO
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
       - name: Build the latest Docker image
-        run: docker build ./bitrix --tag ghcr.io/${{ env.REPO }}-bitrix:latest
+        run: docker build ./bitrix --tag crmreg.azurecr.io/${{ env.REPO }}-bitrix:latest
             
       - name: Push the latest Docker image
-        run: docker push ghcr.io/${{ env.REPO }}-bitrix:latest
+        run: docker push crmreg.azurecr.io/${{ env.REPO }}-bitrix:latest
