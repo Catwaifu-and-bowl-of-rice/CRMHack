@@ -26,16 +26,21 @@
     // box-sizing: border-box;
     // background-color: blue;
     border-radius: $dialog-border-radius;
+    border-top-right-radius: 0;
     // padding: 2rem;
     max-width: 70%;
     height: min-content;
     position: relative;
+    margin-bottom: 1rem;
 
     $character-name-margin: 3rem;
     .character_name {
+      width: min-content;
       margin: 0;
-      margin-left: $character-name-margin;
-      padding: 1em 2rem;
+      // margin-left: $character-name-margin;
+      padding: 2rem;
+      padding-top: 1.5rem;
+      padding-bottom: 0;
       background-color: clr(dialog, msgBcg);
       border-radius: $dialog-border-radius;
       // position: absolute;
@@ -43,18 +48,21 @@
       // right: 0;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+      position: relative;
       &::after {
-        position: absolute;
-        bottom: 0;
+        display: block;
+        left: 0;
+        right: 0;
+        top: $dialog-border-radius;
+        bottom: -$dialog-border-radius;
         content: "";
+        position: absolute;
         background-color: clr(dialog, msgBcg);
         // left: 0;
-        width: 4rem;
-        border-radius: $dialog-border-radius;
+        // border-radius: $dialog-border-radius;
         // border-top-right-radius: $dialog-border-radius;
         // right: 0;
-        top: 0;
-        right: 0;
+        // right: 0;
         z-index: -1;
       }
     }
@@ -63,6 +71,7 @@
       background-color: clr(dialog, msgBcg);
       padding: 1em 2rem;
       border-radius: $dialog-border-radius;
+      border-top-left-radius: 0;
     }
 
     p {
@@ -79,12 +88,10 @@
 
       .character_name {
         background-color: clr(dialog, msgBcgWaifu);
-        margin-left: 0;
-        margin-right: $character-name-margin;
+        // margin-left: 0;
+        // margin-right: $character-name-margin;
 
         &::after {
-          left: 0;
-          right: initial;
           background-color: clr(dialog, msgBcgWaifu);
         }
       }
