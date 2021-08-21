@@ -1,6 +1,7 @@
 import asyncio
 import collections
 from dataclasses import asdict
+from typing import Dict
 from uuid import uuid4
 
 import falcon
@@ -8,6 +9,10 @@ from falcon.asgi.ws import WebSocket
 from falcon.errors import WebSocketDisconnected
 
 from .storage import Chat, ChatRepository, Message
+
+
+subscribers: Dict[str, WebSocket] = {}
+chat_subscribers: Dict[str, Dict[str, WebSocket]] = collections.defaultdict(dict)
 
 
 class ChatResource:
@@ -27,13 +32,9 @@ class ChatResource:
         chat = Chat()
         account = chat.account
         self.repository[account] = chat
-        media = {
-            "account": chat.account,
-            "timestamp": chat.timestamp,
-        }
+        media = asdict(chat)
         resp.media = media
         resp.status = falcon.HTTP_201
-        subscribers = self.repository.subscribers
         await asyncio.gather(
             *[subscriber.send_media(media) for subscriber in subscribers.values()]
         )
@@ -46,7 +47,7 @@ class ChatResource:
 
         socket_id = str(uuid4())
 
-        self.repository.subscribers[socket_id] = ws
+        subscribers[socket_id] = ws
 
         messages = collections.deque()
 
@@ -55,7 +56,7 @@ class ChatResource:
                 try:
                     message = await ws.receive_media()
                 except falcon.WebSocketDisconnected:
-                    del self.repository.subscribers[socket_id]
+                    del subscribers[socket_id]
                     break
                 messages.append(message)
                 # TODO process the message
@@ -69,7 +70,7 @@ class ChatResource:
                 message = messages.popleft()
                 pass
             except falcon.WebSocketDisconnected:
-                del self.repository.subscribers[socket_id]
+                del subscribers[socket_id]
                 break
 
         sink_task.cancel()
@@ -81,6 +82,7 @@ class ChatResource:
     async def on_get(self, req, resp, account):
         chat = self.repository[account]
         serialized = asdict(chat)
+        del serialized["subscribers"]
 
         resp.media = serialized
         resp.status = falcon.HTTP_200
@@ -97,9 +99,8 @@ class ChatResource:
         media = asdict(message)
         resp.media = media
         resp.status = falcon.HTTP_201
-        subscribers = chat.subscribers
         await asyncio.gather(
-            *[subscriber.send_media(media) for subscriber in subscribers.values()]
+            *[subscriber.send_media(media) for subscriber in chat_subscribers[account].values()]
         )
 
     async def on_websocket(self, ws: WebSocket, account):
@@ -111,7 +112,7 @@ class ChatResource:
         chat = self.repository[account]
         socket_id = str(uuid4())
 
-        chat.subscribers[socket_id] = ws
+        chat_subscribers[account][socket_id] = ws
 
         messages = collections.deque()
 
@@ -120,7 +121,7 @@ class ChatResource:
                 try:
                     message = await ws.receive_media()
                 except falcon.WebSocketDisconnected:
-                    del chat.subscribers[socket_id]
+                    del chat_subscribers[account[socket_id]]
                     break
                 messages.append(message)
                 # TODO process the message
@@ -134,7 +135,7 @@ class ChatResource:
                 message = messages.popleft()
                 pass
             except falcon.WebSocketDisconnected:
-                del chat.subscribers[socket_id]
+                del chat_subscribers[account[socket_id]]
                 break
 
         sink_task.cancel()
