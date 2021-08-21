@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { DialogMessage } from "./dialog/dialog";
 
-type BackEmotions = Record<"POSITIVE" | "NEGATIVE" | "NEUTRAL", number>;
+export type BackEmotions = Record<"POSITIVE" | "NEGATIVE" | "NEUTRAL", number>;
 
-type BackMessage = {
+export type BackMessage = {
   text: string;
   timestamp: string;
   emotions: BackEmotions;
@@ -21,7 +21,8 @@ type BackendChats = {
 };
 
 export const useInitChat = (
-  setDialog: Dispatch<SetStateAction<DialogMessage[]>>
+  setDialog: Dispatch<SetStateAction<DialogMessage[]>>,
+  setAccount: Dispatch<SetStateAction<string | undefined>>
 ) => {
   const fetchChat = async () => {
     const initChat = (await (await fetch("/chats/")).json()) as BackendChats;
@@ -33,6 +34,7 @@ export const useInitChat = (
     chat: BackendChat,
     setDialog: Dispatch<SetStateAction<DialogMessage[]>>
   ) => {
+    setAccount(chat.account);
     setDialog(() =>
       chat.messages.map((backMessage) => {
         return { text: backMessage.text, character_name: "Waifu" };

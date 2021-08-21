@@ -8,6 +8,7 @@ import DiaInput from "./components/dialog/DiaInput";
 import waifu from "@characters/waifu/waifu";
 import { Emotion } from "@ctypes/character";
 import { useInitChat } from "./components/fetchChat";
+import { useSocket } from "./components/socket";
 
 const App = () => {
   const [dialog, setDialog] = useState<DialogMessage[]>([
@@ -25,13 +26,15 @@ const App = () => {
     },
   ]);
 
+  const [account, setAccount] = useState<string | undefined>();
+  const [currentWaifuEmotion, setWaifuEmotion] = useState<Emotion>("standart");
+
   const addDialogMessage = (text: string, character_name: string) => {
     setDialog((curDia) => [...curDia, { text, character_name }]);
   };
 
-  useInitChat(setDialog);
-
-  const [currentWaifuEmotion, setWaifuEmotion] = useState<Emotion>("standart");
+  useInitChat(setDialog, setAccount);
+  useSocket(setWaifuEmotion, account);
 
   const sendMessage = (msg: string) => {
     addDialogMessage(msg, "Semen");
