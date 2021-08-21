@@ -8,11 +8,11 @@ import Dialog, { DialogMessage } from "./components/dialog/dialog";
 const App = () => {
   const [dialog, setDialog] = useState<DialogMessage[]>([
     {
-      text: "Pamagi",
+      text: "Nyet",
       character_name: "Waifu",
     },
     {
-      text: "Nyet",
+      text: "Pamagi",
       character_name: "Semen",
     },
   ]);
