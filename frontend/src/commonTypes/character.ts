@@ -2,7 +2,7 @@ export type Emotion = string;
 
 type CharacterInfo = {
   img: string,
-  origin: {
+  origin?: {
     x: number,
     y: number
   }

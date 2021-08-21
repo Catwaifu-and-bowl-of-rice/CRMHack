@@ -1,15 +1,7 @@
 import { CharacterT } from "@ctypes/character";
 import testtagImg from "./examplia-testtag.png";
 
-const origin = {
-  x: 517,
-  y: 939
-}
-
-const testtag = {
-  img: testtagImg,
-  origin
-}
+const testtag = { img: testtagImg }
 
 const examplia: CharacterT = {
   testtag
