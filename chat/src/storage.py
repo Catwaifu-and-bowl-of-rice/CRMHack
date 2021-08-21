@@ -47,13 +47,11 @@ class Chat:
     account: str = field(default_factory=lambda: str(uuid4()))
     timestamp: datetime = field(default_factory=datetime.now)
     messages: List[Message] = field(default_factory=list)
-    subscribers: Dict[str, WebSocket] = field(default_factory=dict)
 
 
 @dataclass
 class ChatRepository:
     chats: Dict[str, Chat] = field(default_factory=dict)
-    subscribers: Dict[str, WebSocket] = field(default_factory=dict)
 
     def __getitem__(self, item: str) -> Chat:
         return self.chats[item]
