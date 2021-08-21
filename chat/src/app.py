@@ -1,6 +1,8 @@
 import falcon.asgi
+
 from .chat import ChatResource
-from .storage import ChatRepository, Chat as ChatStorage
+from .storage import Chat as ChatStorage
+from .storage import ChatRepository
 
 app = falcon.asgi.App()
 

@@ -1,9 +1,12 @@
+from dataclasses import dataclass, field
+from datetime import datetime
 from typing import Dict, Iterable, List
 from uuid import uuid4
-from datetime import datetime
-from dataclasses import dataclass, field
-from .config import Config
+
 import requests
+from falcon.asgi.ws import WebSocket
+
+from .config import Config
 
 
 @dataclass
@@ -15,7 +18,6 @@ class Message:
 
     async def get_emotions(self):
         headers = {
-            # Request headers
             "Content-Type": "application/json",
             "Ocp-Apim-Subscription-Key": Config.EMOTICON_API_KEY,
         }
@@ -45,11 +47,13 @@ class Chat:
     account: str = field(default_factory=lambda: str(uuid4()))
     timestamp: datetime = field(default_factory=datetime.now)
     messages: List[Message] = field(default_factory=list)
+    subscribers: Dict[str, WebSocket] = field(default_factory=dict)
 
 
 @dataclass
 class ChatRepository:
     chats: Dict[str, Chat] = field(default_factory=dict)
+    subscribers: Dict[str, WebSocket] = field(default_factory=dict)
 
     def __getitem__(self, item: str) -> Chat:
         return self.chats[item]
