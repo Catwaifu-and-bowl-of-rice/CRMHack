@@ -27,7 +27,7 @@ jobs:
       - name: Logging into GitHub Container Registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
 
-        - name: downcase REPO
+      - name: downcase REPO
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
