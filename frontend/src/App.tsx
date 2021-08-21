@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import examplia from "@characters/examplia/examplia";
 import { background } from "@backgrounds/bcgIndex";
 import "./App.scss";
@@ -7,6 +7,7 @@ import Dialog, { DialogMessage } from "./components/dialog/dialog";
 import DiaInput from "./components/dialog/DiaInput";
 import waifu from "@characters/waifu/waifu";
 import { Emotion } from "@ctypes/character";
+import { useInitChat } from "./components/fetchChat";
 
 const App = () => {
   const [dialog, setDialog] = useState<DialogMessage[]>([
@@ -28,21 +29,9 @@ const App = () => {
     setDialog((curDia) => [...curDia, { text, character_name }]);
   };
 
+  useInitChat(setDialog);
+
   const [currentWaifuEmotion, setWaifuEmotion] = useState<Emotion>("standart");
-
-  let socket = new WebSocket("ws://localhost:4000");
-
-  socket.onopen = (e) => {
-    // alert("[open] Connection established");
-    // alert("Sending to server");
-    socket.send("Hello, server");
-  };
-
-  socket.onmessage = (e) => {
-    // console.log(e);
-    const waifuEmotion = String(e.data);
-    setWaifuEmotion(waifuEmotion);
-  };
 
   const sendMessage = (msg: string) => {
     addDialogMessage(msg, "Semen");
