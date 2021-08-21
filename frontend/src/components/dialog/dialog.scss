@@ -1,3 +1,5 @@
+@import "@styles/styles";
+
 .dialog {
   display: flex;
   flex-direction: column;
@@ -10,7 +12,7 @@
   z-index: 2;
 
   // overflow-y: scroll;
-  background-color: olivedrab;
+  background-color: clr(dialog, bcg);
   margin: 1rem;
   padding: 2rem;
   align-items: flex-start;
@@ -22,28 +24,70 @@
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   .dialogEntry {
     // box-sizing: border-box;
-    background-color: blue;
+    // background-color: blue;
     border-radius: $dialog-border-radius;
     // padding: 2rem;
     max-width: 70%;
     height: min-content;
+    position: relative;
 
+    $character-name-margin: 3rem;
     .character_name {
-      margin: 0 2rem;
-      padding: 1rem;
-      background-color: orange;
+      margin: 0;
+      margin-left: $character-name-margin;
+      padding: 1em 2rem;
+      background-color: clr(dialog, msgBcg);
+      border-radius: $dialog-border-radius;
+      // position: absolute;
+      // bottom: 100%;
+      // right: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      &::after {
+        position: absolute;
+        bottom: 0;
+        content: "";
+        background-color: clr(dialog, msgBcg);
+        // left: 0;
+        width: 4rem;
+        border-radius: $dialog-border-radius;
+        // border-top-right-radius: $dialog-border-radius;
+        // right: 0;
+        top: 0;
+        right: 0;
+        z-index: -1;
+      }
+    }
+
+    .text {
+      background-color: clr(dialog, msgBcg);
+      padding: 1em 2rem;
       border-radius: $dialog-border-radius;
     }
 
     p {
-      color: white;
-      background-color: blueviolet;
-      padding: 1rem;
+      color: clr(dialog, dialogText);
     }
-  }
 
-  .Waifu {
-    // right: 0;
-    align-self: flex-end;
+    &.Waifu {
+      // right: 0;
+      align-self: flex-end;
+
+      .text {
+        background-color: clr(dialog, msgBcgWaifu);
+      }
+
+      .character_name {
+        background-color: clr(dialog, msgBcgWaifu);
+        margin-left: 0;
+        margin-right: $character-name-margin;
+
+        &::after {
+          left: 0;
+          right: initial;
+          background-color: clr(dialog, msgBcgWaifu);
+        }
+      }
+    }
   }
 }

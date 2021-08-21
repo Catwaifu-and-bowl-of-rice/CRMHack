@@ -32,7 +32,9 @@ const Dialog = ({ dialog }: DialogProps) => {
           >
             {character_name}
           </h4>
-          <p>{text}</p>
+          <div className="text">
+            <p>{text}</p>
+          </div>
         </div>
       ))}
     </section>
