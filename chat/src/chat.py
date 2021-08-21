@@ -2,43 +2,49 @@ from falcon.errors import WebSocketDisconnected
 import falcon
 import collections
 import asyncio
-from .storage import ChatRepository, Chat as ChatStorage
-from uuid import uuid4
+from .storage import ChatRepository, Chat
+from dataclasses import asdict
 
 
-class ChatList:
+class ChatResource:
 
     def __init__(self, repository: ChatRepository):
+
         self.repository = repository
 
-    async def on_get(self, req, resp):
-        accounts = self.repository.keys()
-        # TODO serialize chats
-        pass
+    async def on_get_list(self, req, resp):
+        """Get all the chats."""
+        serialized = asdict(self.repository)
 
-    async def on_post(self, req, resp):
-        chat = ChatStorage()
-        account = str(uuid4())
+        resp.media = serialized
+        resp.status = falcon.HTTP_200
+
+    async def on_post_list(self, req, resp):
+        """Create new chat"""
+        chat = Chat()
+        account = chat.account
         self.repository[account] = chat
-        pass
+        data = {
+            "account": chat.account,
+            "timestamp": chat.timestamp,
+        }
+        resp.media = data
+        resp.status = falcon.HTTP_201
 
-    async def on_websocket(self, ws):
+    async def on_websocket_list(self, ws):
         # create connection to push all the chats created
         pass
 
-
-class Chat:
-
-    def __init__(self, repository: ChatRepository):
-
-        self.repository = repository
-
     async def on_get(self, req, resp, account):
-        # get all the messages
         chat = self.repository[account]
-        pass
+        serialized = asdict(chat)
+
+        resp.media = serialized
+        resp.status = falcon.HTTP_200
 
     async def on_post(self, req, resp, account):
+        # text
+        # date time
         # add message to the chat (used to add from the bitrix API)
         pass
 

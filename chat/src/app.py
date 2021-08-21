@@ -1,10 +1,12 @@
 import falcon.asgi
-from .chat import ChatList, Chat
-from .storage import ChatRepository
+from .chat import ChatResource
+from .storage import ChatRepository, Chat as ChatStorage
 
 app = falcon.asgi.App()
 
 repository = ChatRepository()
 
-app.add_route("/chats", ChatList(repository))
-app.add_route("/chats/{account}", Chat(repository))
+chats = ChatResource(repository)
+
+app.add_route("/chats/", chats, suffix="list")
+app.add_route("/chats/{account}/", chats)

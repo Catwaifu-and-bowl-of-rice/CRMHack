@@ -1,19 +1,55 @@
-from typing import Dict, Deque, Optional, Iterable, List
-from collections import deque
-from falcon.asgi.ws import WebSocket
+from typing import Dict, Iterable, List
+from uuid import uuid4
+from datetime import datetime
+from dataclasses import dataclass, field
+from .config import Config
+import requests
 
 
+@dataclass
+class Message:
+    text: str = field(default="")
+    timestamp: datetime = field(default_factory=datetime.now)
+    emotions: Dict[str, float] = field(default_factory=dict)
+    pk: str = field(default_factory=lambda: str(uuid4))
+
+    async def get_emotions(self):
+        headers = {
+            # Request headers
+            "Content-Type": "application/json",
+            "Ocp-Apim-Subscription-Key": Config.EMOTICON_API_KEY,
+        }
+        data = {
+            "documents": [
+                {
+                    "countryHint": "RU",
+                    "id": self.pk,
+                    "text": self.text,
+                }
+            ]
+        }
+        response = requests.post(
+            Config.EMOTICON_API_URL,
+            json=data,
+            headers=headers,
+        )
+        data = response.json()
+        documents = data[self.pk]["documents"]
+        message = next(item for item in documents if item["id"] == self.pk)
+        emotions = message["confidenceScores"]
+        self.emotions = emotions
+
+
+@dataclass
 class Chat:
+    account: str = field(default_factory=lambda: str(uuid4()))
+    timestamp: datetime = field(default_factory=datetime.now)
+    messages: List[Message] = field(default_factory=list)
 
-    def __init__(self, messages: Optional[Iterable[str]] = None, websockets: Iterable[WebSocket] = None):
-        self.messages: Deque[str] = deque(messages) if messages is not None else deque()
-        self.websockets: List[WebSocket] = list(websockets) if websockets is not None else []
 
-
+@dataclass
 class ChatRepository:
-
-    def __init__(self):
-        self.chats: Dict[str, Chat] = {}
+    chats: Dict[str, Chat] = field(default_factory=dict)
 
     def __getitem__(self, item: str) -> Chat:
         return self.chats[item]
@@ -21,5 +57,5 @@ class ChatRepository:
     def __setitem__(self, key: str, value: Chat):
         self.chats[key] = value
 
-    def keys(self):
+    def keys(self) -> Iterable[str]:
         return self.chats.keys()
