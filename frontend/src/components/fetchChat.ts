@@ -35,6 +35,7 @@ export const useInitChat = (
     setDialog: Dispatch<SetStateAction<DialogMessage[]>>
   ) => {
     setAccount(chat.account);
+    console.log("SET ACCOUNT");
     setDialog(() =>
       chat.messages.map((backMessage) => {
         return { text: backMessage.text, character_name: "Waifu" };
@@ -43,6 +44,9 @@ export const useInitChat = (
   };
 
   useEffect(() => {
-    fetchChat().then((chats) => initChat(chats, setDialog));
+    fetchChat().then(
+      (chats) => initChat(chats, setDialog),
+      (reason) => console.error(reason)
+    );
   }, [setDialog]);
 };

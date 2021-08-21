@@ -34,6 +34,7 @@ const App = () => {
   };
 
   useInitChat(setDialog, setAccount);
+
   useSocket(setWaifuEmotion, account);
 
   const sendMessage = (msg: string) => {

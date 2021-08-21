@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { BackEmotions, BackMessage } from "./fetchChat";
 
 const convertWaifuEmotion = ({ NEGATIVE, NEUTRAL, POSITIVE }: BackEmotions) => {
@@ -10,18 +10,22 @@ export const useSocket = (
   setWaifuEmotion: Dispatch<SetStateAction<string>>,
   account: string | undefined
 ) => {
-  const socket = new WebSocket(`/chats/${account}`);
+  useEffect(() => {
+    if (!account) return;
 
-  socket.onopen = (e) => {
-    // socket.send("Hello, server");
-    console.log("SOCKET OPENED");
-  };
+    const socket = new WebSocket(`ws://localhost/chats/${account}`);
 
-  socket.onmessage = (e) => {
-    // console.log(e);
-    const newMessage = e.data as BackMessage;
-    const emotion = convertWaifuEmotion(newMessage.emotions);
-    // const waifuEmotion = String(e.data);
-    setWaifuEmotion(emotion);
-  };
+    socket.onopen = (e) => {
+      // socket.send("Hello, server");
+      console.log("SOCKET OPENED");
+    };
+
+    socket.onmessage = (e) => {
+      // console.log(e);
+      const newMessage = e.data as BackMessage;
+      const emotion = convertWaifuEmotion(newMessage.emotions);
+      // const waifuEmotion = String(e.data);
+      setWaifuEmotion(emotion);
+    };
+  }, [account, setWaifuEmotion]);
 };
