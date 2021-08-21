@@ -2,6 +2,6 @@ version: '3.3'
 
 services:
   bitrix:
-    build: bitrix
+    image: %ACR_REPO%/%REPONAME%-bitrix
     ports:
       - "8000:8000"
