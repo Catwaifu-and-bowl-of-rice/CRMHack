@@ -1,0 +1,69 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build and deploy auth to registry
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build_and_deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checking out the repository
+        uses: actions/checkout@v2
+        
+      - name: Logging into GitHub Container Registry
+        run: echo ${{ secrets.ACR_PASSWORD }} | docker login ${{ secrets.ACR_REPO }} -u ${{ secrets.ACR_USERNAME }} --password-stdin
+
+      - name: downcase REPO
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
+      - name: Build the latest Docker image
+        run: docker build ./chat --tag ${{ secrets.ACR_REPO }}/${{ env.REPO }}-bitrix:latest
+            
+      - name: Push the latest Docker image
+        run: docker push ${{ secrets.ACR_REPO }}/${{ env.REPO }}-bitrix:latest
+
+  start_azure:
+      needs: build_and_deploy
+      runs-on: ubuntu-latest
+
+      steps:
+
+          - name: Checking out the repository
+            uses: actions/checkout@v2
+
+          - name: downcase REPO
+            run: |
+              echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
+          - name: update template
+            run: |
+              sed docker-compose.yml -e "s|#ACR_REPO#|${{ secrets.ACR_REPO }}|g" -e \
+              "s|#REPONAME#|${{ env.REPO }}|g" > docker-compose-final.yml
+
+          - name: Azure login
+            uses: azure/login@v1
+            with:
+              creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+          - name: Azure update compose
+            uses: azure/CLI@v1
+            with:
+                azcliversion: 2.0.72
+                inlineScript: |
+                    az webapp config container set --resource-group ${{ secrets.AZAPP_RGROUP }} --name ${{ secrets.AZAPP_NAME }} --multicontainer-config-type compose --multicontainer-config-file docker-compose-final.yml --docker-registry-server-url crmreg.azurecr.io --docker-registry-server-password "${{ secrets.ACR_PASSWORD }}" --docker-registry-server-user "${{ secrets.ACR_USERNAME }}"
+
