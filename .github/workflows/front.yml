@@ -27,7 +27,7 @@ jobs:
       - name: Install and Build 🔧 
         run: |
           npm install
-          npm run build
+          CI="" npm run build
         working-directory: ./frontend
 
       - name: Push to Pages
