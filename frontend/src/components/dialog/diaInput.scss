@@ -1,0 +1,35 @@
+@import "@styles/styles";
+
+.diaInput {
+  background-color: clr(dialog, bcg);
+  z-index: 1;
+  padding: 0.25rem;
+  margin: 1rem;
+  margin-top: 0;
+  border-radius: 2rem;
+
+  display: flex;
+
+  input {
+    background-color: transparent;
+    border: none;
+    flex-grow: 1;
+    font-size: 1.25rem;
+    color: white;
+    margin-left: 2rem;
+  }
+
+  button {
+    // padding: rem;
+    // height: 3rem;
+    // width: ;
+    aspect-ratio: 1/1;
+    padding: 0.5em;
+    border-radius: 1rem;
+    font-size: 2rem;
+    line-height: 1rem;
+    background-color: white;
+    border: 0;
+    margin-left: 2rem;
+  }
+}

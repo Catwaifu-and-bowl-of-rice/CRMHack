@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import "./dialog.scss";
 
 export type DialogMessage = {
@@ -19,8 +20,16 @@ const characterColors: Record<string, { clr: string }> = {
 };
 
 const Dialog = ({ dialog }: DialogProps) => {
+  const listRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+  useEffect(() => {
+    if (listRef?.current) {
+      listRef.current.scrollTop = listRef.current.scrollHeight;
+    }
+  }, [dialog]);
+
   return (
-    <section className="dialog">
+    <section className="dialog" ref={listRef}>
       {dialog.map(({ character_name, text }, idx) => (
         <div
           key={idx}

@@ -4,6 +4,7 @@ import { testroom } from "@backgrounds/bcgIndex";
 import "./App.scss";
 import Character from "./components/character/character";
 import Dialog, { DialogMessage } from "./components/dialog/dialog";
+import DiaInput from "./components/dialog/DiaInput";
 
 const App = () => {
   const [dialog, setDialog] = useState<DialogMessage[]>([
@@ -33,6 +34,10 @@ const App = () => {
   //   socket.send("My name is John");
   // };
 
+  const sendMessage = (msg: string) => {
+    addDialogMessage(msg, "Semen");
+  };
+
   return (
     <div className="App">
       <div className="novelWrapper">
@@ -41,6 +46,7 @@ const App = () => {
           {<Character character={examplia} emotion="testtag" />}
         </section>
         <Dialog dialog={dialog} />
+        <DiaInput sendMessage={sendMessage} />
         {/* <h4 className="charName">Examplia</h4> */}
         {/* <p>Bla bla bla</p> */}
       </div>

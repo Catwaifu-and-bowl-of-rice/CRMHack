@@ -4,8 +4,13 @@
   position: relative;
   // overflow-x: hidden;
 
-  min-height: 600px;
+  // min-height: 600px;
   height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  // justify-items: stretch;
 
   // font-size: ;
 
