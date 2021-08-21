@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import examplia from "@characters/examplia/examplia";
-import { testroom } from "@backgrounds/bcgIndex";
+import { background } from "@backgrounds/bcgIndex";
 import "./App.scss";
 import Character from "./components/character/character";
 import Dialog, { DialogMessage } from "./components/dialog/dialog";
 import DiaInput from "./components/dialog/DiaInput";
+import waifu from "@characters/waifu/waifu";
+import { Emotion } from "@ctypes/character";
 
 const App = () => {
   const [dialog, setDialog] = useState<DialogMessage[]>([
@@ -26,13 +28,21 @@ const App = () => {
     setDialog((curDia) => [...curDia, { text, character_name }]);
   };
 
-  // let socket = new WebSocket("ws://localhost:4000");
+  const [currentWaifuEmotion, setWaifuEmotion] = useState<Emotion>("standart");
 
-  // socket.onopen = function(e) {
-  //   alert("[open] Connection established");
-  //   alert("Sending to server");
-  //   socket.send("My name is John");
-  // };
+  let socket = new WebSocket("ws://localhost:4000");
+
+  socket.onopen = (e) => {
+    // alert("[open] Connection established");
+    // alert("Sending to server");
+    socket.send("Hello, server");
+  };
+
+  socket.onmessage = (e) => {
+    // console.log(e);
+    const waifuEmotion = String(e.data);
+    setWaifuEmotion(waifuEmotion);
+  };
 
   const sendMessage = (msg: string) => {
     addDialogMessage(msg, "Semen");
@@ -41,9 +51,9 @@ const App = () => {
   return (
     <div className="App">
       <div className="novelWrapper">
-        <img src={testroom} className="bcg" />
+        <img src={background} className="bcg" />
         <section className="characters">
-          {<Character character={examplia} emotion="testtag" />}
+          {<Character character={waifu} emotion={currentWaifuEmotion} />}
         </section>
         <Dialog dialog={dialog} />
         <DiaInput sendMessage={sendMessage} />

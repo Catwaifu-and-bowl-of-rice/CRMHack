@@ -13,10 +13,17 @@ const DiaInput = ({ sendMessage }: DiaInputProps) => {
   };
 
   return (
-    <section className="diaInput">
+    <form
+      className="diaInput"
+      action="#"
+      onSubmit={(e) => {
+        e.preventDefault();
+        sendMessage(currentInput);
+      }}
+    >
       <input type="text" onChange={setInputHandler} />
-      <button onClick={() => sendMessage(currentInput)}>{">"}</button>
-    </section>
+      <button>{">"}</button>
+    </form>
   );
 };
 

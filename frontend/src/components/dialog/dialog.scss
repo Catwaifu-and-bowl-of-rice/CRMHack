@@ -19,9 +19,13 @@
 
   $dialog-border-radius: 2rem;
   border-radius: $dialog-border-radius;
+
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
+
+  scroll-behavior: smooth;
+
   .dialogEntry {
     // box-sizing: border-box;
     // background-color: blue;
