@@ -2,16 +2,24 @@ from falcon.errors import WebSocketDisconnected
 import falcon
 import collections
 import asyncio
+from .storage import ChatRepository, Chat as ChatStorage
+from uuid import uuid4
 
 
 class ChatList:
 
-    def __init__(self):
-        # TODO initialize the chat lists with repository of the chats
-        pass
+    def __init__(self, repository: ChatRepository):
+        self.repository = repository
 
     async def on_get(self, req, resp):
-        # get the list of the chats
+        accounts = self.repository.keys()
+        # TODO serialize chats
+        pass
+
+    async def on_post(self, req, resp):
+        chat = ChatStorage()
+        account = str(uuid4())
+        self.repository[account] = chat
         pass
 
     async def on_websocket(self, ws):
@@ -21,8 +29,13 @@ class ChatList:
 
 class Chat:
 
+    def __init__(self, repository: ChatRepository):
+
+        self.repository = repository
+
     async def on_get(self, req, resp, account):
         # get all the messages
+        chat = self.repository[account]
         pass
 
     async def on_post(self, req, resp, account):
