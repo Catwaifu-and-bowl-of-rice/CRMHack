@@ -2,7 +2,7 @@ from falcon.errors import WebSocketDisconnected
 import falcon
 import collections
 import asyncio
-from .storage import ChatRepository, Chat
+from .storage import ChatRepository, Chat, Message
 from dataclasses import asdict
 
 
@@ -43,10 +43,16 @@ class ChatResource:
         resp.status = falcon.HTTP_200
 
     async def on_post(self, req, resp, account):
-        # text
-        # date time
-        # add message to the chat (used to add from the bitrix API)
-        pass
+        media = await req.media
+        text = media["text"]
+        chat = self.repository[account]
+        message = Message(
+            text=text,
+        )
+        await message.get_emotions()
+        chat.messages.append(message)
+        resp.media = asdict(message)
+        resp.status = falcon.HTTP_201
 
     async def on_websocket(self, ws, account):
 
