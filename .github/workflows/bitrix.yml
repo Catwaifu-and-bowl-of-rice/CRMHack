@@ -38,6 +38,7 @@ jobs:
         run: docker push ${{ secrets.ACR_REPO }}/${{ env.REPO }}-bitrix:latest
 
   start_azure:
+      needs: build_and_deploy
       runs-on: ubuntu-latest
 
       steps:
@@ -51,8 +52,8 @@ jobs:
 
           - name: update template
             run: |
-              sed -i "s/%ACR_REPO%/${{ secrets.ACR_REPO }}/g" \
-              sed -i "s/%REPONAME%/${{ env.REPO }}/g"
+              sed "s/%ACR_REPO%/${{ secrets.ACR_REPO }}/g" docker-compose.yml \
+              sed "s/%REPONAME%/${{ env.REPO }}/g" docker-compose.yml
 
           - name: Updating azure
             run: echo docker-compose.yml
