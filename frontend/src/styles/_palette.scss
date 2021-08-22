@@ -1,7 +1,17 @@
+// $palette: (
+//   dialog: (
+//     bcg: rgba(#333, 0.55),
+//     msgBcgWaifu: rgba(#444, 1),
+//     msgBcg: #444,
+//     dialogText: white,
+//   ),
+// );
+
 $palette: (
   dialog: (
-    bcg: rgba(#333, 0.55),
-    msgBcgWaifu: rgba(#444, 1),
+    bcg: #150017,
+    msgBcgWaifu: transparent,
+    // rgba(#444, 1),
     msgBcg: #444,
     dialogText: white,
   ),
