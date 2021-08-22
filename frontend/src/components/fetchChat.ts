@@ -26,9 +26,10 @@ export const useInitChat = (
 ) => {
   const fetchChat = async () => {
     // try {
-    console.log(process.env);
+    // console.log(process.env);
+    const CHAT_API = "http://crmhack-chat.azurewebsites.net/api";
     const fetchedChats = (await (
-      await fetch(`${process.env.REACT_APP_CHAT_API}/chats/`)
+      await fetch(`${/*process.env.REACT_APP_CHAT_API*/ CHAT_API}/chats/`)
     ).json()) as BackendChats;
     console.log("FETCHED CHATS", fetchedChats);
     const chats = Object.values(fetchedChats.chats);
