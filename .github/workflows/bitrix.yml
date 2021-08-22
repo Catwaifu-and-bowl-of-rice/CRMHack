@@ -77,5 +77,4 @@ jobs:
             with:
                 azcliversion: 2.0.72
                 inlineScript: |
-                    az webapp config container set --resource-group ${{ secrets.AZAPP_RGROUP }} --name ${{ secrets.AZAPP_NAME }} --multicontainer-config-type compose --multicontainer-config-file docker-compose-final.yml --docker-registry-server-url crmreg.azurecr.io --docker-registry-server-password "${{ secrets.ACR_PASSWORD }}" --docker-registry-server-user "${{ secrets.ACR_USERNAME }}" --settings EMOTICON_API_URL="${{ secrets.EMOTICON_API_URL }}" --settings EMOTICON_API_KEY="${{ EMOTICON_API_KEY }}"
-
+                    az webapp config container set --resource-group ${{ secrets.AZAPP_RGROUP }} --name ${{ secrets.AZAPP_NAME }} --multicontainer-config-type compose --multicontainer-config-file docker-compose-final.yml --docker-registry-server-url crmreg.azurecr.io --docker-registry-server-password "${{ secrets.ACR_PASSWORD }}" --docker-registry-server-user "${{ secrets.ACR_USERNAME }}"
