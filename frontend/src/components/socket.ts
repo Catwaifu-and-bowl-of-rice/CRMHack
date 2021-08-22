@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import { BackEmotions, BackMessage } from "./fetchChat";
 
 const convertWaifuEmotion = ({ NEGATIVE, NEUTRAL, POSITIVE }: BackEmotions) => {
+  // return Object.entries(emotions).sort((a, b) => a[1] - b[1])[0];
   // if (POSITIVE > NEGATIVE && POSITIVE > NEUTRAL) return "happy";
   if (POSITIVE > NEGATIVE && POSITIVE > NEUTRAL) return "positive";
   if (NEGATIVE > POSITIVE && NEGATIVE > NEUTRAL) return "negative";
