@@ -7,8 +7,8 @@ authors = ["S. Guliaev <dev.sagul@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 falcon = "^3.0.1"
-uvicorn = "^0.15.0"
 requests = "^2.26.0"
+uvicorn = {extras = ["standard"], version = "^0.15.0"}
 
 [tool.poetry.dev-dependencies]
 black = "^21.7b0"
