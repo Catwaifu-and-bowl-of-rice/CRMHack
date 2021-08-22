@@ -100,8 +100,16 @@ class ChatResource:
         resp.media = media
         resp.status = falcon.HTTP_201
         await asyncio.gather(
-            *[subscriber.send_media(media) for subscriber in chat_subscribers[account].values()]
+            *(subscriber.send_media(media) for subscriber in chat_subscribers[account].values())
         )
+
+    async def on_delete(self, req, resp, account):
+        await asyncio.gather(
+            *(subscriber.close() for subscriber in chat_subscribers[account].values())
+        )
+        del chat_subscribers[account]
+        del self.repository[account]
+        resp.status = falcon.HTTP_204
 
     async def on_websocket(self, ws: WebSocket, account):
         try:
