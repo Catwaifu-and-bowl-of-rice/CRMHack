@@ -1,0 +1,24 @@
+$character-side-margin: 4rem;
+.character {
+  position: absolute;
+  // left: 0;
+  // translate: 0;
+  height: 90vh;
+  // bottom: 0;
+  // left: -15%;
+  // margin: auto;
+
+  // margin-right: 2rem;
+
+  &.left {
+    align-self: start;
+    margin-left: $character-side-margin;
+  }
+  &.right {
+    align-self: end;
+    margin-right: $character-side-margin;
+  }
+  &.center {
+    align-self: center;
+  }
+}

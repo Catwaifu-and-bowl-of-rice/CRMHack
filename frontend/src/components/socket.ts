@@ -1,7 +1,9 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { DialogMessage } from "./dialog/dialog";
 import { BackEmotions, BackMessage } from "./fetchChat";
 
 const convertWaifuEmotion = ({ NEGATIVE, NEUTRAL, POSITIVE }: BackEmotions) => {
+  // return Object.entries(emotions).sort((a, b) => a[1] - b[1])[0];
   // if (POSITIVE > NEGATIVE && POSITIVE > NEUTRAL) return "happy";
   if (POSITIVE > NEGATIVE && POSITIVE > NEUTRAL) return "positive";
   if (NEGATIVE > POSITIVE && NEGATIVE > NEUTRAL) return "negative";
@@ -10,12 +12,13 @@ const convertWaifuEmotion = ({ NEGATIVE, NEUTRAL, POSITIVE }: BackEmotions) => {
 
 export const useSocket = (
   setWaifuEmotion: Dispatch<SetStateAction<string>>,
-  account: string | undefined
+  account: string | undefined,
+  addDialogMessage: (message: DialogMessage) => void
 ) => {
   useEffect(() => {
-    if (!account) return;
+    if (!account) return console.error("Account is undefined");
 
-    const socket = new WebSocket(`ws://localhost/chats/${account}`);
+    const socket = new WebSocket(`${process.env.WS_CHAT_API}/chats/${account}`);
 
     socket.onopen = (e) => {
       // socket.send("Hello, server");
@@ -25,9 +28,13 @@ export const useSocket = (
     socket.onmessage = (e) => {
       // console.log(e);
       const newMessage = e.data as BackMessage;
-      const emotion = convertWaifuEmotion(newMessage.emotions);
+      console.log("Received new message", newMessage);
+      const { emotions, pk, text } = newMessage;
+      const emotion = convertWaifuEmotion(emotions);
+
+      addDialogMessage({ text, pk, character_name: "Waifu" });
       // const waifuEmotion = String(e.data);
       setWaifuEmotion(emotion);
     };
-  }, [account, setWaifuEmotion]);
+  }, [account, setWaifuEmotion, addDialogMessage]);
 };
