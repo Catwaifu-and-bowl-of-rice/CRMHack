@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/css/main.00b59c9e.chunk.css",
-    "main.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.d29f13a7.chunk.js",
-    "main.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.d29f13a7.chunk.js.map",
+    "main.css": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/css/main.f6f08a2d.chunk.css",
+    "main.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.c2dc8444.chunk.js",
+    "main.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.c2dc8444.chunk.js.map",
     "runtime-main.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/runtime-main.b1e7ccb9.js",
     "runtime-main.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/runtime-main.b1e7ccb9.js.map",
-    "static/js/2.9d43743d.chunk.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.9d43743d.chunk.js",
-    "static/js/2.9d43743d.chunk.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.9d43743d.chunk.js.map",
+    "static/js/2.97c761c9.chunk.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.97c761c9.chunk.js",
+    "static/js/2.97c761c9.chunk.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.97c761c9.chunk.js.map",
     "index.html": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/index.html",
-    "static/css/main.00b59c9e.chunk.css.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/css/main.00b59c9e.chunk.css.map",
-    "static/js/2.9d43743d.chunk.js.LICENSE.txt": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.9d43743d.chunk.js.LICENSE.txt",
+    "static/css/main.f6f08a2d.chunk.css.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/css/main.f6f08a2d.chunk.css.map",
+    "static/js/2.97c761c9.chunk.js.LICENSE.txt": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.97c761c9.chunk.js.LICENSE.txt",
     "static/media/background.4fd85e44.jpg": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/media/background.4fd85e44.jpg",
     "static/media/testroom.e988a775.jpg": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/media/testroom.e988a775.jpg",
     "static/media/waifu-negative.8f105a61.mp4": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/media/waifu-negative.8f105a61.mp4",
@@ -19,8 +19,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.b1e7ccb9.js",
-    "static/js/2.9d43743d.chunk.js",
-    "static/css/main.00b59c9e.chunk.css",
-    "static/js/main.d29f13a7.chunk.js"
+    "static/js/2.97c761c9.chunk.js",
+    "static/css/main.f6f08a2d.chunk.css",
+    "static/js/main.c2dc8444.chunk.js"
   ]
 }
