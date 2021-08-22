@@ -1,14 +1,15 @@
-import { background } from "@backgrounds/bcgIndex";
-import waifu from "@characters/waifu/waifu";
-import { Emotion } from "@ctypes/character";
-import { randomUUID } from "crypto";
-import React, { useState } from "react";
-import "./App.scss";
-import Character from "./components/character/character";
+import { useState } from "react";
 import DiaInput from "./components/dialog/DiaInput";
 import Dialog, { DialogMessage } from "./components/dialog/dialog";
+import { randomUUID } from "crypto";
 import { useInitChat } from "./components/fetchChat";
 import { useSocket } from "./components/socket";
+import { background } from "@backgrounds/bcgIndex";
+import waifu from "@characters/waifu/waifu";
+import Character from "./components/character/character";
+import { Emotion } from "@ctypes/character";
+import "./App.scss";
+import "./styles/novelWrapper.scss";
 
 const App = () => {
   const [dialog, setDialog] = useState<DialogMessage[]>([
