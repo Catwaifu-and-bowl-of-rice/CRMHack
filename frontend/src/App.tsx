@@ -36,17 +36,23 @@ const App = () => {
   const addDialogMessage = (message: DialogMessage) => {
     setDialog((curDia) => [...curDia, message]);
   };
+
+  useInitChat(setDialog, setAccount);
+
+  const [sendSocketMessage] = useSocket(
+    setWaifuEmotion,
+    account,
+    addDialogMessage
+  );
+
   const sendMessage = (msg: string) => {
     addDialogMessage({
       text: msg,
       character_name: "Semen",
       pk: randomBytes(8).toString("hex"),
     });
+    sendSocketMessage?.(msg);
   };
-
-  useInitChat(setDialog, setAccount);
-
-  useSocket(setWaifuEmotion, account, addDialogMessage);
 
   return (
     <div className="App">
