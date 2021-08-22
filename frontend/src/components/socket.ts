@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
+import { DialogMessage } from "./dialog/dialog";
 import { BackEmotions, BackMessage } from "./fetchChat";
 
 const convertWaifuEmotion = ({ NEGATIVE, NEUTRAL, POSITIVE }: BackEmotions) => {
@@ -11,7 +12,8 @@ const convertWaifuEmotion = ({ NEGATIVE, NEUTRAL, POSITIVE }: BackEmotions) => {
 
 export const useSocket = (
   setWaifuEmotion: Dispatch<SetStateAction<string>>,
-  account: string | undefined
+  account: string | undefined,
+  addDialogMessage: (message: DialogMessage) => void
 ) => {
   useEffect(() => {
     if (!account) return console.error("Account is undefined");
@@ -27,7 +29,10 @@ export const useSocket = (
       // console.log(e);
       const newMessage = e.data as BackMessage;
       console.log("Received new message", newMessage);
-      const emotion = convertWaifuEmotion(newMessage.emotions);
+      const { emotions, pk, text } = newMessage;
+      const emotion = convertWaifuEmotion(emotions);
+
+      addDialogMessage({ text, pk, character_name: "Waifu" });
       // const waifuEmotion = String(e.data);
       setWaifuEmotion(emotion);
     };

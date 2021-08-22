@@ -52,8 +52,8 @@ export const useInitChat = (
     setDialog(() =>
       chat.messages
         .sort((a, b) => Number(a.timestamp) - Number(b.timestamp))
-        .map((backMessage) => {
-          return { text: backMessage.text, character_name: "Waifu" };
+        .map(({ text, pk }) => {
+          return { text, pk, character_name: "Waifu" };
         })
     );
   };

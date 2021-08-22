@@ -4,6 +4,7 @@ import "./dialog.scss";
 export type DialogMessage = {
   text: string;
   character_name: string;
+  pk: string;
 };
 
 type DialogProps = {
@@ -30,9 +31,9 @@ const Dialog = ({ dialog }: DialogProps) => {
 
   return (
     <section className="dialog" ref={listRef}>
-      {dialog.map(({ character_name, text }, idx) => (
+      {dialog.map(({ character_name, text, pk }) => (
         <div
-          key={idx}
+          key={pk}
           className={`dialogEntry ${character_name === "Waifu" ? "Waifu" : ""}`}
         >
           <h4
