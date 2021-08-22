@@ -54,7 +54,10 @@ export const useInitChat = (
       console.log("SET ACCOUNT");
       setDialog(() =>
         chat.messages
-          .sort((a, b) => Number(a.timestamp) - Number(b.timestamp))
+          .sort(
+            (a, b) =>
+              new Date(a.timestamp).valueOf() - new Date(b.timestamp).valueOf()
+          )
           .map(({ text, pk }) => {
             return { text, pk, character_name: "Waifu" };
           })
