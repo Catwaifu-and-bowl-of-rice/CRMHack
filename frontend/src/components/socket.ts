@@ -23,7 +23,7 @@ export const useSocket = (
     const SOCKET_API = "ws://crmhack-chat.azurewebsites.net/api";
 
     const socket = new WebSocket(
-      `${/* process.env.REACT_APP_WS_CHAT_API */ SOCKET_API}/chats/${account}`
+      `${/* process.env.REACT_APP_WS_CHAT_API */ SOCKET_API}/chats/${account}/`
     );
     socketRef.current = socket;
 

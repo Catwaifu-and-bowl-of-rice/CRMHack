@@ -6,6 +6,7 @@ import { useInitChat } from "./components/fetchChat";
 import { useSocket } from "./components/socket";
 import { background } from "@backgrounds/bcgIndex";
 import waifu from "@characters/waifu/waifu";
+import waifu2 from "@characters/waifu2/waifu2";
 import Character from "./components/character/character";
 import { Emotion } from "@ctypes/character";
 import "./App.scss";
@@ -13,6 +14,7 @@ import "./styles/novelWrapper.scss";
 
 const App = () => {
   const [dialog, setDialog] = useState<DialogMessage[]>([
+    /*
     {
       text: "Nyet",
       character_name: "Waifu",
@@ -28,6 +30,7 @@ const App = () => {
       character_name: "Semen",
       pk: "3",
     },
+    */
   ]);
 
   const [account, setAccount] = useState<string | undefined>();
@@ -51,12 +54,13 @@ const App = () => {
       character_name: "Semen",
       pk: randomBytes(8).toString("hex"),
     });
-    sendSocketMessage?.(msg);
+    // sendSocketMessage?.(msg);
   };
 
   return (
     <div className="App">
       <div className="novelWrapper">
+        {/* <button onClick={} */}
         <img src={background} className="bcg" alt="Background" />
         <section className="characters">
           {<Character character={waifu} emotion={currentWaifuEmotion} />}
