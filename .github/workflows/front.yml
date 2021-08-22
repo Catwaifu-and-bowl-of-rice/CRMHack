@@ -27,7 +27,7 @@ jobs:
       - name: Install and Build 🔧 
         run: |
           npm install
-          CI="" PUBLIC_URL="http://lotholl.github.io/CRMHack" npm run build
+          CI="" PUBLIC_URL="https://lotholl.github.io/CRMHack" npm run build
         working-directory: ./frontend
 
       - name: Push to Pages
