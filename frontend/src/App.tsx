@@ -13,6 +13,7 @@ import "./styles/novelWrapper.scss";
 
 const App = () => {
   const [dialog, setDialog] = useState<DialogMessage[]>([
+    /*
     {
       text: "Nyet",
       character_name: "Waifu",
@@ -28,6 +29,7 @@ const App = () => {
       character_name: "Semen",
       pk: "3",
     },
+    */
   ]);
 
   const [account, setAccount] = useState<string | undefined>();
@@ -51,7 +53,7 @@ const App = () => {
       character_name: "Semen",
       pk: randomBytes(8).toString("hex"),
     });
-    sendSocketMessage?.(msg);
+    // sendSocketMessage?.(msg);
   };
 
   return (
