@@ -1,6 +1,7 @@
 import asyncio
 import collections
 from dataclasses import asdict
+import logging
 from typing import Dict
 from uuid import uuid4
 
@@ -9,6 +10,9 @@ from falcon.asgi.ws import WebSocket
 from falcon.errors import WebSocketDisconnected
 
 from .storage import Chat, ChatRepository, Message
+
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 subscribers: Dict[str, WebSocket] = {}
@@ -35,9 +39,9 @@ class ChatResource:
         media = asdict(chat)
         resp.media = media
         resp.status = falcon.HTTP_201
-        await asyncio.gather(
-            *[subscriber.send_media(media) for subscriber in subscribers.values()]
-        )
+        #await asyncio.gather(
+        #    *[subscriber.send_media(media) for subscriber in subscribers.values()]
+        #)
 
     async def on_websocket_list(self, ws):
         try:
