@@ -3,7 +3,6 @@ import click
 import json
 
 URL = "http://crmhack-chat.azurewebsites.net/api/chats/"
-URL = "http://localhost/api/chats/"
 
 @click.group("chats")
 def chats():
