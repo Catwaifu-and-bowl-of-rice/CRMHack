@@ -1,7 +1,12 @@
 version: '3.3'
 
 services:
+  chat:
+    image: #ACR_REPO#/#REPONAME#-chat
+    ports:
+      - "80:8000"
+
   bitrix:
     image: #ACR_REPO#/#REPONAME#-bitrix
     ports:
-      - "80:8000"
+      - "8080:80"
