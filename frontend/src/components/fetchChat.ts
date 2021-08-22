@@ -25,15 +25,23 @@ export const useInitChat = (
   setAccount: Dispatch<SetStateAction<string | undefined>>
 ) => {
   const fetchChat = async () => {
-    const initChat = (await (await fetch("/chats/")).json()) as BackendChats;
-    const chats = Object.values(initChat.chats)[0];
-    return chats;
+    try {
+      const initChat = (await (
+        await fetch(`${process.env.CHAT_API}/chats/`)
+      ).json()) as BackendChats;
+      const chats = Object.values(initChat.chats);
+      if (chats.length === 0) throw Error("No chats found");
+      return chats[0];
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const initChat = (
-    chat: BackendChat,
+    chat: BackendChat | undefined,
     setDialog: Dispatch<SetStateAction<DialogMessage[]>>
   ) => {
+    if (!chat) return console.error("Chat is undefined");
     setAccount(chat.account);
     console.log("SET ACCOUNT");
     setDialog(() =>
@@ -45,7 +53,7 @@ export const useInitChat = (
 
   useEffect(() => {
     fetchChat().then(
-      (chats) => initChat(chats, setDialog),
+      (chat) => initChat(chat, setDialog),
       (reason) => console.error(reason)
     );
   }, [setDialog]);
