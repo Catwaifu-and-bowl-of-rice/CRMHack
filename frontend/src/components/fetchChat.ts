@@ -26,11 +26,16 @@ export const useInitChat = (
 ) => {
   const fetchChat = async () => {
     try {
-      const initChat = (await (
+      const fetchedChats = (await (
         await fetch(`${process.env.CHAT_API}/chats/`)
       ).json()) as BackendChats;
-      const chats = Object.values(initChat.chats);
-      if (chats.length === 0) throw Error("No chats found");
+      const chats = Object.values(fetchedChats.chats);
+
+      if (chats.length === 0) {
+        console.error("/chats/ is empty :C");
+        return;
+      }
+
       return chats[0];
     } catch (err) {
       console.error(err);
