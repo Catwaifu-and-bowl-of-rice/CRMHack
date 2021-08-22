@@ -1,14 +1,12 @@
 {
   "files": {
     "main.css": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/css/main.00b59c9e.chunk.css",
-    "main.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.7442effd.chunk.js",
-    "main.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.7442effd.chunk.js.map",
-    "runtime-main.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/runtime-main.35136c54.js",
-    "runtime-main.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/runtime-main.35136c54.js.map",
+    "main.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.d29f13a7.chunk.js",
+    "main.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.d29f13a7.chunk.js.map",
+    "runtime-main.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/runtime-main.b1e7ccb9.js",
+    "runtime-main.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/runtime-main.b1e7ccb9.js.map",
     "static/js/2.9d43743d.chunk.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.9d43743d.chunk.js",
     "static/js/2.9d43743d.chunk.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.9d43743d.chunk.js.map",
-    "static/js/3.05800c26.chunk.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/3.05800c26.chunk.js",
-    "static/js/3.05800c26.chunk.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/3.05800c26.chunk.js.map",
     "index.html": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/index.html",
     "static/css/main.00b59c9e.chunk.css.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/css/main.00b59c9e.chunk.css.map",
     "static/js/2.9d43743d.chunk.js.LICENSE.txt": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.9d43743d.chunk.js.LICENSE.txt",
@@ -20,9 +18,9 @@
     "static/media/waifu_happy.eae5a9bf.png": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/media/waifu_happy.eae5a9bf.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.35136c54.js",
+    "static/js/runtime-main.b1e7ccb9.js",
     "static/js/2.9d43743d.chunk.js",
     "static/css/main.00b59c9e.chunk.css",
-    "static/js/main.7442effd.chunk.js"
+    "static/js/main.d29f13a7.chunk.js"
   ]
 }
