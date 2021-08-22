@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 import { DialogMessage } from "./dialog/dialog";
 
 export type BackEmotions = Record<"POSITIVE" | "NEGATIVE" | "NEUTRAL", number>;
@@ -42,26 +42,29 @@ export const useInitChat = (
     }
   };
 
-  const initChat = (
-    chat: BackendChat | undefined,
-    setDialog: Dispatch<SetStateAction<DialogMessage[]>>
-  ) => {
-    if (!chat) return console.error("Chat is undefined");
-    setAccount(chat.account);
-    console.log("SET ACCOUNT");
-    setDialog(() =>
-      chat.messages
-        .sort((a, b) => Number(a.timestamp) - Number(b.timestamp))
-        .map(({ text, pk }) => {
-          return { text, pk, character_name: "Waifu" };
-        })
-    );
-  };
+  const initChat = useCallback(
+    (
+      chat: BackendChat | undefined,
+      setDialog: Dispatch<SetStateAction<DialogMessage[]>>
+    ) => {
+      if (!chat) return console.error("Chat is undefined");
+      setAccount(chat.account);
+      console.log("SET ACCOUNT");
+      setDialog(() =>
+        chat.messages
+          .sort((a, b) => Number(a.timestamp) - Number(b.timestamp))
+          .map(({ text, pk }) => {
+            return { text, pk, character_name: "Waifu" };
+          })
+      );
+    },
+    [setAccount]
+  );
 
   useEffect(() => {
     fetchChat().then(
       (chat) => initChat(chat, setDialog),
       (reason) => console.error(reason)
     );
-  }, [setDialog]);
+  }, [setDialog, initChat]);
 };

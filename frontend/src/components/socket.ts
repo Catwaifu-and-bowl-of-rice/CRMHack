@@ -36,5 +36,5 @@ export const useSocket = (
       // const waifuEmotion = String(e.data);
       setWaifuEmotion(emotion);
     };
-  }, [account, setWaifuEmotion]);
+  }, [account, setWaifuEmotion, addDialogMessage]);
 };
