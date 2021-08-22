@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/css/main.82190ef7.chunk.css",
-    "main.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.b8446d03.chunk.js",
-    "main.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.b8446d03.chunk.js.map",
+    "main.css": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/css/main.38ac5602.chunk.css",
+    "main.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.a7df4ae5.chunk.js",
+    "main.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/main.a7df4ae5.chunk.js.map",
     "runtime-main.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/runtime-main.b1e7ccb9.js",
     "runtime-main.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/runtime-main.b1e7ccb9.js.map",
     "static/js/2.102c7566.chunk.js": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.102c7566.chunk.js",
     "static/js/2.102c7566.chunk.js.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.102c7566.chunk.js.map",
     "index.html": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/index.html",
-    "static/css/main.82190ef7.chunk.css.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/css/main.82190ef7.chunk.css.map",
+    "static/css/main.38ac5602.chunk.css.map": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/css/main.38ac5602.chunk.css.map",
     "static/js/2.102c7566.chunk.js.LICENSE.txt": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/js/2.102c7566.chunk.js.LICENSE.txt",
     "static/media/background.4fd85e44.jpg": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/media/background.4fd85e44.jpg",
     "static/media/testroom.e988a775.jpg": "https://Catwaifu-and-bowl-of-rice.github.io/CRMHack/static/media/testroom.e988a775.jpg",
@@ -20,7 +20,7 @@
   "entrypoints": [
     "static/js/runtime-main.b1e7ccb9.js",
     "static/js/2.102c7566.chunk.js",
-    "static/css/main.82190ef7.chunk.css",
-    "static/js/main.b8446d03.chunk.js"
+    "static/css/main.38ac5602.chunk.css",
+    "static/js/main.a7df4ae5.chunk.js"
   ]
 }
