@@ -3,6 +3,9 @@ version: '3.3'
 services:
   chat:
     image: #ACR_REPO#/#REPONAME#-chat
+    environment:
+      - EMOTICON_API_URL=${EMOTICON_API_URL}
+      - EMOTICON_API_KEY=${EMOTICON_API_KEY}
 
   bitrix:
     image: #ACR_REPO#/#REPONAME#-bitrix
