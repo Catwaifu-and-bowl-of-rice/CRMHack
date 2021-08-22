@@ -44,7 +44,7 @@ jobs:
         run: docker push ${{ secrets.ACR_REPO }}/${{ env.REPO }}-bitrix:latest
 
       - name: Build the latest Docker image
-        run: docker build ./bitrix --tag ${{ secrets.ACR_REPO }}/${{ env.REPO }}-nginx:latest
+        run: docker build ./nginx --tag ${{ secrets.ACR_REPO }}/${{ env.REPO }}-nginx:latest
 
       - name: Push the latest Docker image
         run: docker push ${{ secrets.ACR_REPO }}/${{ env.REPO }}-nginx:latest
