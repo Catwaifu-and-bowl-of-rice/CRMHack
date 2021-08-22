@@ -40,7 +40,7 @@ const App = () => {
     setDialog((curDia) => [...curDia, message]);
   };
 
-  useInitChat(setDialog, setAccount);
+  useInitChat(setDialog, setAccount, setWaifuEmotion);
 
   const [sendSocketMessage] = useSocket(
     setWaifuEmotion,

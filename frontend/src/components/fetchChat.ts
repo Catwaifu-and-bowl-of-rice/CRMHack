@@ -22,7 +22,8 @@ type BackendChats = {
 
 export const useInitChat = (
   setDialog: Dispatch<SetStateAction<DialogMessage[]>>,
-  setAccount: Dispatch<SetStateAction<string | undefined>>
+  setAccount: Dispatch<SetStateAction<string | undefined>>,
+  setWaifuEmotion: Dispatch<SetStateAction<string>>
 ) => {
   const fetchChat = async () => {
     // try {
@@ -45,14 +46,27 @@ export const useInitChat = (
     // }
   };
 
+  const convertWaifuEmotion = ({ NEGATIVE, NEUTRAL, POSITIVE }: BackEmotions) => {
+    // return Object.entries(emotions).sort((a, b) => a[1] - b[1])[0];
+    // if (POSITIVE > NEGATIVE && POSITIVE > NEUTRAL) return "happy";
+    if (POSITIVE > NEGATIVE && POSITIVE > NEUTRAL) return "positive";
+    if (NEGATIVE > POSITIVE && NEGATIVE > NEUTRAL) return "negative";
+    return "standart";
+  };
+
   const initChat = useCallback(
     (
       chat: BackendChat | undefined,
-      setDialog: Dispatch<SetStateAction<DialogMessage[]>>
+      setDialog: Dispatch<SetStateAction<DialogMessage[]>>,  setWaifuEmotion: Dispatch<SetStateAction<string>>
     ) => {
       if (!chat) return console.error("Chat is undefined");
       setAccount(chat.account);
       console.log("SET ACCOUNT");
+
+      const message = chat.messages[chat.messages.length - 1]
+
+      convertWaifuEmotion(message.emotions)
+
       setDialog(() =>
         chat.messages
           .sort(
@@ -69,8 +83,8 @@ export const useInitChat = (
 
   useEffect(() => {
     fetchChat().then(
-      (chat) => initChat(chat, setDialog),
+      (chat) => initChat(chat, setDialog, setWaifuEmotion),
       (reason) => console.error(reason)
     );
-  }, [setDialog, initChat]);
+  }, [setDialog, initChat,setWaifuEmotion]);
 };
