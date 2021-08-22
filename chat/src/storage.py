@@ -4,7 +4,6 @@ from typing import Dict, Iterable, List
 from uuid import uuid4
 
 import requests
-from falcon.asgi.ws import WebSocket
 
 from .config import Config
 
@@ -14,7 +13,7 @@ class Message:
     text: str = field(default="")
     timestamp: datetime = field(default_factory=datetime.now)
     emotions: Dict[str, float] = field(default_factory=dict)
-    pk: str = field(default_factory=lambda: str(uuid4))
+    pk: str = field(default_factory=lambda: str(uuid4()))
 
     async def get_emotions(self):
         headers = {
@@ -36,7 +35,7 @@ class Message:
             headers=headers,
         )
         data = response.json()
-        documents = data[self.pk]["documents"]
+        documents = data["documents"]
         message = next(item for item in documents if item["id"] == self.pk)
         emotions = message["confidenceScores"]
         self.emotions = emotions
