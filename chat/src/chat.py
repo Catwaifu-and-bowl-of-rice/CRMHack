@@ -39,9 +39,9 @@ class ChatResource:
         media = asdict(chat)
         resp.media = media
         resp.status = falcon.HTTP_201
-        #await asyncio.gather(
-        #    *[subscriber.send_media(media) for subscriber in subscribers.values()]
-        #)
+        await asyncio.gather(
+            *[subscriber.send_media(media) for subscriber in subscribers.values()]
+        )
 
     async def on_websocket_list(self, ws):
         try:
@@ -86,7 +86,6 @@ class ChatResource:
     async def on_get(self, req, resp, account):
         chat = self.repository[account]
         serialized = asdict(chat)
-        del serialized["subscribers"]
 
         resp.media = serialized
         resp.status = falcon.HTTP_200
