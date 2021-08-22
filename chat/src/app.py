@@ -5,7 +5,7 @@ from .chat import ChatResource
 from .storage import ChatRepository
 from .handlers import JSONDateHandler
 
-app = falcon.asgi.App()
+app = falcon.asgi.App(cors_enable=True)
 
 repository = ChatRepository()
 
