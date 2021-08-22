@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DiaInput from "./components/dialog/DiaInput";
 import Dialog, { DialogMessage } from "./components/dialog/dialog";
-import { randomUUID } from "crypto";
+import { randomBytes } from "crypto";
 import { useInitChat } from "./components/fetchChat";
 import { useSocket } from "./components/socket";
 import { background } from "@backgrounds/bcgIndex";
@@ -37,7 +37,11 @@ const App = () => {
     setDialog((curDia) => [...curDia, message]);
   };
   const sendMessage = (msg: string) => {
-    addDialogMessage({ text: msg, character_name: "Semen", pk: randomUUID() });
+    addDialogMessage({
+      text: msg,
+      character_name: "Semen",
+      pk: randomBytes(8).toString("hex"),
+    });
   };
 
   useInitChat(setDialog, setAccount);
