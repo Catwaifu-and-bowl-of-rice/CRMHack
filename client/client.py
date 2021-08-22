@@ -4,6 +4,7 @@ import json
 
 URL = "http://crmhack-chat.azurewebsites.net/api/chats/"
 
+
 @click.group("chats")
 def chats():
     pass
