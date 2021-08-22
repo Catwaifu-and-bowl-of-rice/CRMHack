@@ -6,6 +6,7 @@ import { useInitChat } from "./components/fetchChat";
 import { useSocket } from "./components/socket";
 import { background } from "@backgrounds/bcgIndex";
 import waifu from "@characters/waifu/waifu";
+import waifu2 from "@characters/waifu2/waifu2";
 import Character from "./components/character/character";
 import { Emotion } from "@ctypes/character";
 import "./App.scss";
@@ -59,6 +60,7 @@ const App = () => {
   return (
     <div className="App">
       <div className="novelWrapper">
+        {/* <button onClick={} */}
         <img src={background} className="bcg" alt="Background" />
         <section className="characters">
           {<Character character={waifu} emotion={currentWaifuEmotion} />}
