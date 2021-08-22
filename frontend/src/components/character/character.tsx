@@ -1,4 +1,5 @@
 import { CharacterT, Emotion } from "@ctypes/character";
+import "./character.scss";
 
 type CharacterProps = {
   position?: "LEFT | CENTER | RIGHT";

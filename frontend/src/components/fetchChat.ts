@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 import { DialogMessage } from "./dialog/dialog";
 
 export type BackEmotions = Record<"POSITIVE" | "NEGATIVE" | "NEUTRAL", number>;
@@ -25,28 +25,46 @@ export const useInitChat = (
   setAccount: Dispatch<SetStateAction<string | undefined>>
 ) => {
   const fetchChat = async () => {
-    const initChat = (await (await fetch("/chats/")).json()) as BackendChats;
-    const chats = Object.values(initChat.chats)[0];
-    return chats;
+    try {
+      const fetchedChats = (await (
+        await fetch(`${process.env.CHAT_API}/chats/`)
+      ).json()) as BackendChats;
+      const chats = Object.values(fetchedChats.chats);
+
+      if (chats.length === 0) {
+        console.error("/chats/ is empty :C");
+        return;
+      }
+
+      return chats[0];
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const initChat = (
-    chat: BackendChat,
-    setDialog: Dispatch<SetStateAction<DialogMessage[]>>
-  ) => {
-    setAccount(chat.account);
-    console.log("SET ACCOUNT");
-    setDialog(() =>
-      chat.messages.map((backMessage) => {
-        return { text: backMessage.text, character_name: "Waifu" };
-      })
-    );
-  };
+  const initChat = useCallback(
+    (
+      chat: BackendChat | undefined,
+      setDialog: Dispatch<SetStateAction<DialogMessage[]>>
+    ) => {
+      if (!chat) return console.error("Chat is undefined");
+      setAccount(chat.account);
+      console.log("SET ACCOUNT");
+      setDialog(() =>
+        chat.messages
+          .sort((a, b) => Number(a.timestamp) - Number(b.timestamp))
+          .map(({ text, pk }) => {
+            return { text, pk, character_name: "Waifu" };
+          })
+      );
+    },
+    [setAccount]
+  );
 
   useEffect(() => {
     fetchChat().then(
-      (chats) => initChat(chats, setDialog),
+      (chat) => initChat(chat, setDialog),
       (reason) => console.error(reason)
     );
-  }, [setDialog]);
+  }, [setDialog, initChat]);
 };
