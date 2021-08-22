@@ -36,6 +36,16 @@
   }
 
   button {
+    transition: 125ms;
+    &:hover {
+      background-color: #ff0073;
+      box-shadow: 0 0 16px rgba(#ff0073, 0.75);
+      color: white;
+    }
+    &:active {
+      background-color: #ad145b;
+    }
+    // cursor: pointer;
     // padding: rem;
     // height: 3rem;
     // width: ;

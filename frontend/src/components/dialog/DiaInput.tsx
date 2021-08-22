@@ -18,6 +18,7 @@ const DiaInput = ({ sendMessage }: DiaInputProps) => {
       action="#"
       onSubmit={(e) => {
         e.preventDefault();
+        if (currentInput === "") return;
         sendMessage(currentInput);
         setInput("");
       }}
