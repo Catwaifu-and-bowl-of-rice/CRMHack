@@ -18,10 +18,12 @@ const DiaInput = ({ sendMessage }: DiaInputProps) => {
       action="#"
       onSubmit={(e) => {
         e.preventDefault();
+        if (currentInput === "") return;
         sendMessage(currentInput);
+        setInput("");
       }}
     >
-      <input type="text" onChange={setInputHandler} />
+      <input type="text" onChange={setInputHandler} value={currentInput} />
       <button>{">"}</button>
     </form>
   );

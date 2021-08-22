@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { DialogMessage } from "./dialog/dialog";
 import { BackEmotions, BackMessage } from "./fetchChat";
 
@@ -15,10 +15,13 @@ export const useSocket = (
   account: string | undefined,
   addDialogMessage: (message: DialogMessage) => void
 ) => {
+  const socketRef = useRef<WebSocket | null>(null);
+
   useEffect(() => {
     if (!account) return console.error("Account is undefined");
 
     const socket = new WebSocket(`${process.env.WS_CHAT_API}/chats/${account}`);
+    socketRef.current = socket;
 
     socket.onopen = (e) => {
       // socket.send("Hello, server");
@@ -37,4 +40,6 @@ export const useSocket = (
       setWaifuEmotion(emotion);
     };
   }, [account, setWaifuEmotion, addDialogMessage]);
+
+  return [(message: string) => socketRef.current?.send(message)];
 };
