@@ -25,21 +25,23 @@ export const useInitChat = (
   setAccount: Dispatch<SetStateAction<string | undefined>>
 ) => {
   const fetchChat = async () => {
-    try {
-      const fetchedChats = (await (
-        await fetch(`${process.env.CHAT_API}/chats/`)
-      ).json()) as BackendChats;
-      const chats = Object.values(fetchedChats.chats);
+    // try {
+    console.log(process.env);
+    const fetchedChats = (await (
+      await fetch(`${process.env.REACT_APP_CHAT_API}/chats/`)
+    ).json()) as BackendChats;
+    console.log("FETCHED CHATS", fetchedChats);
+    const chats = Object.values(fetchedChats.chats);
 
-      if (chats.length === 0) {
-        console.error("/chats/ is empty :C");
-        return;
-      }
-
-      return chats[0];
-    } catch (err) {
-      console.error(err);
+    if (chats.length === 0) {
+      console.error("/chats/ is empty :C");
+      return;
     }
+
+    return chats[0];
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   const initChat = useCallback(

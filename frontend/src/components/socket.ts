@@ -20,7 +20,9 @@ export const useSocket = (
   useEffect(() => {
     if (!account) return console.error("Account is undefined");
 
-    const socket = new WebSocket(`${process.env.WS_CHAT_API}/chats/${account}`);
+    const socket = new WebSocket(
+      `${process.env.REACT_APP_WS_CHAT_API}/chats/${account}`
+    );
     socketRef.current = socket;
 
     socket.onopen = (e) => {
