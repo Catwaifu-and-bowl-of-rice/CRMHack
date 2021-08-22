@@ -25,21 +25,24 @@ export const useInitChat = (
   setAccount: Dispatch<SetStateAction<string | undefined>>
 ) => {
   const fetchChat = async () => {
-    try {
-      const fetchedChats = (await (
-        await fetch(`${process.env.CHAT_API}/chats/`)
-      ).json()) as BackendChats;
-      const chats = Object.values(fetchedChats.chats);
+    // try {
+    // console.log(process.env);
+    const CHAT_API = "http://crmhack-chat.azurewebsites.net/api";
+    const fetchedChats = (await (
+      await fetch(`${/*process.env.REACT_APP_CHAT_API*/ CHAT_API}/chats/`)
+    ).json()) as BackendChats;
+    console.log("FETCHED CHATS", fetchedChats);
+    const chats = Object.values(fetchedChats.chats);
 
-      if (chats.length === 0) {
-        console.error("/chats/ is empty :C");
-        return;
-      }
-
-      return chats[0];
-    } catch (err) {
-      console.error(err);
+    if (chats.length === 0) {
+      console.error("/chats/ is empty :C");
+      return;
     }
+
+    return chats[0];
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   const initChat = useCallback(
@@ -52,7 +55,10 @@ export const useInitChat = (
       console.log("SET ACCOUNT");
       setDialog(() =>
         chat.messages
-          .sort((a, b) => Number(a.timestamp) - Number(b.timestamp))
+          .sort(
+            (a, b) =>
+              new Date(a.timestamp).valueOf() - new Date(b.timestamp).valueOf()
+          )
           .map(({ text, pk }) => {
             return { text, pk, character_name: "Waifu" };
           })
