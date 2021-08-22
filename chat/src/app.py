@@ -9,5 +9,5 @@ repository = ChatRepository()
 
 chats = ChatResource(repository)
 
-app.add_route("/chats/", chats, suffix="list")
-app.add_route("/chats/{account}/", chats)
+app.add_route("/", chats, suffix="list")
+app.add_route("/{account}/", chats)
